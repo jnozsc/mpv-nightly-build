@@ -1,0 +1,191 @@
+name: mpv nightly build for macOS
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # nightly build
+    - cron: "0 14 * * *"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      CC: clang
+      CXX: clang++
+      HOMEBREW_NO_ANALYTICS: 1
+    steps:
+    - name: Get current timestamp
+      id: timestamp
+      run: |
+        echo "::set-output name=timestamp::$(date +%s)"
+        echo "::set-output name=date::$(date +%Y%m%d)"
+
+    - name: Get latest git tag
+      id: git_tag
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: jnozsc/mpv-nightly-build
+        releases-only: false
+
+    - name: Checkout mpv-player/mpv
+      uses: actions/checkout@v2
+      with:
+        repository: 'mpv-player/mpv'
+        fetch-depth: 0
+
+    - name: Check upstream version
+      id: upstream_tag
+      run: |
+        git fetch
+        sed -i .bak 's/--dirty//g' version.sh
+        echo "::set-output name=build_hash::$(sh version.sh)"
+
+    - name: Install dependencies
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      run: |
+        echo "Force brew install for 10.13"
+        export MACOSX_DEPLOYMENT_TARGET="10.13"
+        brew update
+        path="$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula"
+        for dep in dav1d theora libunistring libtasn1 rtmpdump pcre p11-kit libogg speex tesseract xvid snappy rubberband libsamplerate libsndfile flac opus opencore-amr libvpx libvorbis libvidstab libsoxr frei0r aom srt leptonica webp lame glib openjpeg openssl@1.1 docutils ffmpeg jpeg libarchive libass little-cms2 luajit mujs pkg-config uchardet youtube-dl zimg ffmpeg sdl2 libb2 lz4 xz zstd libbluray cryptopp libffi fontconfig freetype libpng fribidi giflib gmp gnutls libidn2 nettle graphite2 harfbuzz gettext libtiff little-cms2 x264 x265; do sed -i "" $'s/def install/def install\\\n    ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.13"\\\n/' $path/$dep.rb;done
+        for dep in luajit python@3.8; do sed -i "" $'s/MacOS.version/"10.13"/' $path/$dep.rb;done
+        echo "Insall packages from source. ATTN: order matters"
+        brew reinstall -s openssl@1.1
+        brew reinstall -s lz4
+        brew reinstall -s xz
+        brew reinstall -s zstd
+        brew reinstall -s pkg-config
+        brew reinstall -s python@3.8
+        export PKG_CONFIG_PATH="/usr/local/opt/python@3.8/lib/pkgconfig:$PKG_CONFIG_PATH"
+        brew reinstall -s libffi
+        export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig:$PKG_CONFIG_PATH"
+        brew reinstall -s libpng
+        brew reinstall -s freetype
+        brew reinstall -s fontconfig
+        brew reinstall -s pcre
+        brew reinstall -s glib
+        brew reinstall -s gmp
+        brew reinstall -s libunistring
+        brew reinstall -s libidn2
+        brew reinstall -s nettle
+        brew reinstall -s gettext
+        brew reinstall -s jpeg
+        brew reinstall -s libtiff
+        brew reinstall -s little-cms2
+        brew reinstall -s libtasn1
+        brew reinstall -s gnutls
+        brew reinstall -s p11-kit
+        brew reinstall -s rtmpdump
+        brew install -s sdl2
+        brew install -s libb2
+        brew install -s libbluray
+        brew install -s cryptopp
+        brew install -s fribidi
+        brew install -s giflib
+        brew install -s graphite2
+        brew install -s harfbuzz
+        brew install -s x264
+        brew install -s x265
+        brew install docutils
+        brew install -s libarchive
+        brew install -s libass
+        brew install luajit --HEAD
+        brew install -s mujs
+        brew install -s uchardet
+        brew install -s youtube-dl
+        brew install -s zimg
+        brew install -s openjpeg
+        brew install -s lame
+        brew reinstall -s webp
+        brew install -s leptonica
+        brew install -s srt
+        brew install -s libogg
+        brew install -s speex
+        brew install -s tesseract
+        brew install -s xvid
+        brew install -s snappy
+        brew install -s libvorbis
+        brew install -s flac
+        brew install -s libsndfile
+        brew install -s libsamplerate
+        brew install -s rubberband
+        brew install -s opus
+        brew install -s opencore-amr
+        brew install -s libvpx
+        brew install -s libvidstab
+        brew install -s libsoxr
+        brew install -s frei0r
+        brew install -s aom
+        brew install -s theora
+        brew install -s dav1d
+        brew install -s ffmpeg
+
+
+    - name: Build binary
+      id: build_binary
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      run: |
+        export PKG_CONFIG_PATH="/usr/local/opt/libarchive/lib/pkgconfig/:$PKG_CONFIG_PATH"
+        export MACOSX_DEPLOYMENT_TARGET="10.13"
+        mv VERSION VERSION.bak
+        python3 bootstrap.py
+        ./waf configure
+        ./waf
+        python3 TOOLS/osxbundle.py build/mpv
+        mv version.sh.bak version.sh
+        mkdir -p release
+        cp -r build/mpv.app release
+
+    - name: Sanity check for back compatibility
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      run: |
+        cd build/mpv.app/Contents/MacOS/lib
+        for l in *.dylib
+        do
+          echo $l
+          count=0
+          count=`otool -l $l | grep -c minos` || :
+          if [ $count -gt 0 ]; then
+            echo 'find bad dylib. need to recompile it'
+            exit 1
+          else
+            echo 'ok'
+          fi
+        done
+        cd ..
+
+    - name: Build Apple Disk Image
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      run: |
+        brew install create-dmg
+        create-dmg --sandbox-safe --no-internet-enable --volname "mpv" --app-drop-link 200 185 mpv.dmg release
+        rm -rf release/mpv.app
+        mv mpv.dmg release/
+
+    - name: Create Release
+      id: create_release
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.upstream_tag.outputs.build_hash }}
+        release_name: mpv nightly build ${{ steps.timestamp.outputs.date }}
+        body: |
+            mpv nightly build ${{ steps.timestamp.outputs.date }}, version ${{ steps.upstream_tag.outputs.build_hash }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      if: ${{ success() && steps.upstream_tag.outputs.build_hash != steps.git_tag.outputs.tag }}
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: release/mpv.dmg
+        asset_name: mpv-nightly-${{ steps.upstream_tag.outputs.build_hash }}.dmg
+        asset_content_type: application/x-apple-diskimage
