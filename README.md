@@ -47,8 +47,17 @@ mpv does not give a F to stable release, the stable release is created to [make 
 
 <img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_warning.png" alt="notarization_warning" width="50%">
 
-macOS requires software to be [notarization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution) for security purposes. This process requires a $99 annual subscription plan. I don't have enough money for it. A workaround is
+macOS requires software to be [notarization](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution) for security purposes. This process requires a $99 annual subscription plan. I don't have enough money for it.
 
+There are at least 2 workarounds available
+
+(1) You can hold your `⌥/alt/option` key > right click the `mpv.app`, and then choose `open`
+
+<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_2.png" alt="notarization_workaround" width="50%">
+
+<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_3.png" alt="notarization_workaround" width="50%">
+
+(2)
 - from `Apple ` menu
 - choose `System Preferences`
 - click `Security & Privacy`
