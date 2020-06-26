@@ -53,9 +53,9 @@ There are at least 2 workarounds available
 
 (1) You can hold your `⌥/alt/option` key > right click the `mpv.app`, and then choose `open`
 
-<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_2.png" alt="notarization_workaround" width="50%">
+<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_2.jpg" alt="notarization_workaround" width="50%">
 
-<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_3.png" alt="notarization_workaround" width="50%">
+<img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_3.jpg" alt="notarization_workaround" width="50%">
 
 (2)
 - from `Apple ` menu
