@@ -59,7 +59,7 @@ macOS requires software to be [notarization](https://developer.apple.com/documen
 
 ### I download it, how can I change some settings
 
-Place a `mpv.conf` in your `~/.config/mpv` folder, read the [manual](https://mpv.io/manual/master/) if you can. My configuration looks like [this](https://gist.github.com/jnozsc/99f62fd24b501ef78e8f).
+Place a `mpv.conf` in your `~/.mpv` folder, read the [manual](https://mpv.io/manual/master/) if you can. My configuration looks like [this](https://gist.github.com/jnozsc/99f62fd24b501ef78e8f).
 
 ### This does not work for me
 
