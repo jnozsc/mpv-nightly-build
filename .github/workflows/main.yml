@@ -177,7 +177,10 @@ jobs:
         tag_name: ${{ steps.upstream_tag.outputs.build_hash }}
         release_name: mpv nightly build ${{ steps.timestamp.outputs.date }}
         body: |
-            mpv nightly build ${{ steps.timestamp.outputs.date }}, version ${{ steps.upstream_tag.outputs.build_hash }}
+            mpv nightly build
+            build date: ${{ steps.timestamp.outputs.date }}
+            version: ${{ steps.upstream_tag.outputs.build_hash }}
+            OS support: macOS High Sierra 10.13 or later
         draft: false
         prerelease: false
 
