@@ -14,7 +14,7 @@ Download mpv nightly build for macOS [here](https://github.com/jnozsc/mpv-nightl
 
 I always want to recommend `mpv.app`  to my non-programming friends as the best video player on macOS.
 
-However, mpv doesn't provide any official binary package. In addition, I don't like any existing 3rd party build.
+However, mpv doesn't provide any official binary package.
 
 I setup this nightly job to build the latest version for people who prefer to download, drag it to `/Application/` folder and enjoy their life.
 
@@ -51,7 +51,7 @@ macOS requires software to be [notarization](https://developer.apple.com/documen
 
 There are at least 2 workarounds available
 
-(1) You can hold your `⌥/alt/option` key > right click the `mpv.app`, and then choose `open`
+(1) You can hold your <kbd>⌥ aka <kbd>alt/option</kbd> key > right click the `mpv.app`, and then choose `open`
 
 <img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_2.jpg" alt="notarization_workaround" width="50%">
 
