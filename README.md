@@ -51,7 +51,7 @@ macOS requires software to be [notarization](https://developer.apple.com/documen
 
 There are at least 2 workarounds available
 
-(1) You can hold your <kbd>⌥ aka <kbd>alt/option</kbd> key > right click the `mpv.app`, and then choose `open`
+(1) You can hold your <kbd>⌥</kbd> aka <kbd>alt/option</kbd> key > right click the `mpv.app`, and then choose `open`
 
 <img src="https://github.com/jnozsc/mpv-nightly-build/raw/master/asset/notarization_workaround_2.jpg" alt="notarization_workaround" width="50%">
 
