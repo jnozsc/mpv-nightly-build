@@ -53,7 +53,7 @@ jobs:
         for dep in luajit python@3.8; do sed -i "" $'s/MacOS.version/"10.13"/' $path/$dep.rb;done
         echo "rollback nasm to build x264"
         for dep in nasm; do sed -i "" $'s/28a50f80d2f4023e444b113e9ddc57fcec2b2f295a07ce158cf3f18740375831/e24ade3e928f7253aa8c14aa44726d1edf3f98643f87c9d72ec1df44b26be8f5/' $path/$dep.rb;done
-        for dep in nasm; do sed -i "" $'s/"https://www.nasm.us/pub/nasm/releasebuilds/2.15.01/nasm-2.15.01.tar.xz"/"https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.xz"/' $path/$dep.rb;done
+        for dep in nasm; do sed -i "" $'s/2.15.01/2.14.02/' $path/$dep.rb;done
         echo "Insall packages from source. ATTN: order matters"
         brew reinstall -s openssl@1.1
         brew reinstall -s lz4
