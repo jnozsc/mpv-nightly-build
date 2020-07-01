@@ -86,7 +86,7 @@ jobs:
         brew install -s giflib
         brew install -s graphite2
         brew install -s harfbuzz
-        brew install -s x264
+        brew install -s x264 --HEAD
         brew install -s x265
         brew install docutils
         brew install -s libarchive
