@@ -51,6 +51,9 @@ jobs:
         path="$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula"
         for dep in rav1e dav1d theora libunistring libtasn1 rtmpdump pcre p11-kit libogg speex tesseract xvid snappy rubberband libsamplerate libsndfile flac opus opencore-amr libvpx libvorbis libvidstab libsoxr frei0r aom srt leptonica webp lame glib openjpeg openssl@1.1 docutils ffmpeg jpeg libarchive libass little-cms2 luajit mujs pkg-config uchardet youtube-dl zimg ffmpeg sdl2 libb2 lz4 xz zstd libbluray cryptopp libffi fontconfig freetype libpng fribidi giflib gmp gnutls libidn2 nettle graphite2 harfbuzz gettext libtiff little-cms2 x264 x265; do sed -i "" $'s/def install/def install\\\n    ENV["MACOSX_DEPLOYMENT_TARGET"] = "10.13"\\\n/' $path/$dep.rb;done
         for dep in luajit python@3.8; do sed -i "" $'s/MacOS.version/"10.13"/' $path/$dep.rb;done
+        echo "rollback nasm to build x264"
+        for dep in nasm; do sed -i "" $'s/28a50f80d2f4023e444b113e9ddc57fcec2b2f295a07ce158cf3f18740375831/e24ade3e928f7253aa8c14aa44726d1edf3f98643f87c9d72ec1df44b26be8f5/' $path/$dep.rb;done
+        for dep in nasm; do sed -i "" $'s/"https://www.nasm.us/pub/nasm/releasebuilds/2.15.01/nasm-2.15.01.tar.xz"/"https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.xz"/' $path/$dep.rb;done
         echo "Insall packages from source. ATTN: order matters"
         brew reinstall -s openssl@1.1
         brew reinstall -s lz4
@@ -86,7 +89,8 @@ jobs:
         brew install -s giflib
         brew install -s graphite2
         brew install -s harfbuzz
-        brew install -s x264 --HEAD
+        brew install -s nasm
+        brew install -s x264
         brew install -s x265
         brew install docutils
         brew install -s libarchive
