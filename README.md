@@ -28,7 +28,7 @@ Well, I use `mpv.app` on macOS only.
 
 | macOS | version | compatibility |
 | :------------- | -------------: | :-------------: |
-| Big Sur | 11.0 | ❔ |
+| Big Sur | 11.0 | ❓ |
 | Catalina | 10.15 | 🟢 |
 | Mojave | 10.14 | 🟢 |
 | High Sierra | 10.13 | 🟢 |
@@ -37,7 +37,7 @@ Well, I use `mpv.app` on macOS only.
 
 * 🟢 means compatible
 * ❌ means incompatible
-* ❔ means unknown
+* ❓ means unknown
 
 macOS, formerly known as OS X, does not have an official statement about its End-Of-Life policy. Based on [wikipedia](https://en.wikipedia.org/wiki/MacOS_version_history), it seems Apple only provides support to last 3 major release versions. So I try my best to support last 3 major release versions.
 
