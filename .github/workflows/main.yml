@@ -6,7 +6,7 @@ on:
       - master
   schedule:
     # nightly build
-    - cron: "0 14 * * *"
+    - cron: "0 12 * * *"
 
 jobs:
   build:
