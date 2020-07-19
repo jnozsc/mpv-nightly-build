@@ -1,4 +1,4 @@
-name: mpv nightly build for macOS
+name: build
 
 on:
   push:
