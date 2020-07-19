@@ -1,6 +1,6 @@
 # mpv nightly build for macOS
 
-![mpv nightly build for macOS](https://github.com/jnozsc/mpv-nightly-build/workflows/mpv%20nightly%20build%20for%20macOS/badge.svg)
+![build](https://github.com/jnozsc/mpv-nightly-build/workflows/mpv%20nightly%20build%20for%20macOS/badge.svg)
 
 ## TL;DR
 
