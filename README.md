@@ -16,7 +16,7 @@ I always want to recommend `mpv.app`  to my non-programming friends as the best 
 
 However, mpv doesn't provide any official binary package.
 
-I setup this automatical nightly job to build the latest version of `mpv.app` for people who prefer to download, drag it to `/Application/` folder and enjoy their life.
+I setup this automatical nightly job to build the latest version of `mpv.app` for people who prefer to download, drag it to `/Applications/` folder and enjoy their life.
 
 ## Q&A
 
