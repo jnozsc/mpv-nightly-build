@@ -24,6 +24,12 @@ I setup this automatical nightly job to build the latest version of `mpv.app` fo
 
 Well, I use `mpv.app` on macOS only.
 
+### System requirements
+
+A modern Macintosh machine officially supported by Apple.
+
+[Vintage and obsolete products](https://support.apple.com/en-us/HT201624), Hackintosh or any other third-party patched macOS versions are untested, cannot and does not guarantee the functionality or performance.
+
 ### I am still on the previous major release of macOS/OSX, does it work?
 
 | macOS | version | compatibility |
