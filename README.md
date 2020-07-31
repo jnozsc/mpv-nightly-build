@@ -1,6 +1,7 @@
 # mpv nightly build for macOS
 
 ![build](https://github.com/jnozsc/mpv-nightly-build/workflows/build/badge.svg)
+![downloads](https://img.shields.io/github/downloads/jnozsc/mpv-nightly-build/total.svg?style=flat&labelColor=202020&color=brightgreen&logo=apple)
 
 ## TL;DR
 
