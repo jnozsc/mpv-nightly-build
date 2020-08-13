@@ -5,7 +5,7 @@
 
 ## TL;DR
 
-Download mpv nightly build for macOS [here](https://github.com/jnozsc/mpv-nightly-build/releases)
+Download mpv nightly build for macOS [here](https://github.com/jnozsc/mpv-nightly-build/releases/latest)
 
 ## Describe the project you work on
 
