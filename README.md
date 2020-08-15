@@ -13,7 +13,7 @@ Download mpv nightly build for macOS [here](https://github.com/jnozsc/mpv-nightl
 
 **Unofficial** [mpv](https://mpv.io/) nightly build for macOS.
 
-I always want to recommend `mpv.app`  to my non-programming friends as the best video player on macOS.
+I always want to recommend `mpv.app`  to my non-programming friends as the best third party video player on macOS.
 
 However, mpv doesn't provide any official binary package.
 
