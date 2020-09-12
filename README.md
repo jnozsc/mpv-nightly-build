@@ -50,7 +50,7 @@ macOS, formerly known as OS X, does not have an official statement about its End
 
 ### Why nightly? I need the **stable** version
 
-mpv does not give a F to stable release, the stable release is created to [make Linux distributions happy](https://github.com/mpv-player/mpv#release-cycle).
+mpv does not release the stable version frequently, the stable release is created to [make Linux distributions happy](https://github.com/mpv-player/mpv#release-cycle).
 
 ###  "mpv" cannot be opened because the developer can not be verified
 
