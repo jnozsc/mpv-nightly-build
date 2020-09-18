@@ -92,7 +92,7 @@ jobs:
         brew install -s x265
         brew install docutils
         brew install -s libarchive
-        brew install -s libass
+        brew install libass --HEAD
         brew install luajit --HEAD
         brew install -s mujs
         brew install -s uchardet
